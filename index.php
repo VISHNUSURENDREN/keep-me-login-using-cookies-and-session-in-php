@@ -35,11 +35,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                 // Password is stored as cookie for 10 years as  
                 // 10years * 365days * 24hrs * 60mins * 60secs 
                 setcookie("user_password", $password, time() + 
-                                    (10 * 365 * 24 * 60 * 60)); 
-  
-                // After setting cookies the session variable will be set 
-                $_SESSION["name"] = $name; 
-  
+                                    (10 * 365 * 24 * 60 * 60));
             } 
             else
             { 
@@ -52,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                     setcookie("user_password", ""); 
                 } 
             } 
+            // After setting cookies the session variable will be set 
+            $_SESSION["name"] = $name; 
             header('Location: home.php'); 
         } 
         else
