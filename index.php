@@ -1,19 +1,17 @@
 <?php 
 session_start(); 
-if (isset($_SESSION["name"])) 
-{ 
-header('Location: home.php');
-} 
-elseif (isset($_COOKIE['user_login']) && isset($_COOKIE['user_password'])) {
+
+if (isset($_COOKIE['user_login']) && isset($_COOKIE['user_password'])) {
+    $_SESSION["name"]=$_COOKIE['user_login'];
     header('Location: home.php');
 } 
-// $connect = mysqli_connect("localhost", "root", "", "testing"); 
+$connect = mysqli_connect("localhost", "root", "", "testing"); 
 if ($_SERVER['REQUEST_METHOD']=='POST') 
 { 
     if (!empty($_POST["user_name"]) && !empty($_POST["user_password"])) 
     { 
-        $name="vishnu";
-        $password="012345";
+        $name="hari";
+        $password="baccha";
         // $name = mysqli_real_escape_string($connect, $_POST["user_name"]); 
         // $password = md5(mysqli_real_escape_string($connect, 
         //                                        $_POST["user_password"])); 
@@ -35,7 +33,10 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                 // Password is stored as cookie for 10 years as  
                 // 10years * 365days * 24hrs * 60mins * 60secs 
                 setcookie("user_password", $password, time() + 
-                                    (10 * 365 * 24 * 60 * 60));
+                                    (10 * 365 * 24 * 60 * 60)); 
+  
+                // After setting cookies the session variable will be set 
+                 
             } 
             else
             { 
@@ -48,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                     setcookie("user_password", ""); 
                 } 
             } 
-            // After setting cookies the session variable will be set 
             $_SESSION["name"] = $name; 
+ 
             header('Location: home.php'); 
         } 
         else
